@@ -1,16 +1,83 @@
 <!DOCTYPE html>
+<html>
 <head>
- <h1> World Religion Matching Game! </h1> 
- <h2> Match all of the religions </h2>
-    <hr>
-    <p> the goal of the game is to match as many religions as you can with their respective scriptures and texts</p>
+ <title>World Religion Matching Game! </title>
+ <script
+  src="https://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script> 
+ <style>
+     .container {
+         width: 1080px;
+         margin: 0 auto;
+     }
+     .card {
+         float: left;
+         margin: 10px;
+        height: 200px;
+         width: 150px;
+         background: black;
+     }
+ </style>
+ 
+    
 
 <body>
+    <div class="container">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+
+    </div>
+<script>
+$(document).ready(function(){
+    var app = {
+        cards: [1,1,2,2,3,3,4,4,5,5],
+        init: function() {
+            app.shuffle();
+
+        },
+        shuffle: function() {
+            var random = 0;
+            var temp = 0;
+            for(i = 1; i < app.cards.length; i++) {
+                random = Math.round(Math.random() * i);
+                temp = app.cards[i];
+                app.cards[i] = app.cards[random]; 
+                app.cards[random] = temp;
+
+        
+
+            }
+            app.assignCards();
+            console.log('Shuffled card array' +app.cards);
+        
+        },
+        assignCards: function() {
+            $('.card').each(function(index) {
+                $(this).attr('data-card-value', app.cards[index]);
+        });
+
+        },
+        clickHandlers: function() {
+
+        }
+    };
+    app.init();
+
+});
+</script>
     
 </body>
 </head>
 <footer>
 
 </footer>
-
-<script src="http://code.jquery.com/jquery-X.X.X.js"></script>
+</html>
