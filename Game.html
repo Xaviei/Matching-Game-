@@ -16,7 +16,7 @@
          margin: 10px;
         height: 200px;
          width: 150px;
-         background: black;
+         background: lightblue;
      }
  </style>
  
@@ -24,16 +24,16 @@
 
 <body>
     <div class="container">
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
+        <div class="card unmatched"></div>
+        <div class="card unmatched"></div>
+        <div class="card unmatched"></div>
+        <div class="card unmatched"></div>
+        <div class="card unmatched"></div>
+        <div class="card unmatched"></div>
+        <div class="card unmatched"></div>
+        <div class="card unmatched"></div>
+        <div class="card unmatched"></div>
+        <div class="card unmatched"></div>
 
     </div>
 <script>
@@ -63,14 +63,37 @@ $(document).ready(function(){
         assignCards: function() {
             $('.card').each(function(index) {
                 $(this).attr('data-card-value', app.cards[index]);
-        });
-
+            });
+            app.clickHandlers();
         },
         clickHandlers: function() {
+            $('.card').on('click', function() {
+                $(this).html('<p>'+$(this).data('cardValue')+'</p>').addClass('selected');
+                app.checkMatch();
+            });
 
+        },
+        checkMatch: function() {
+            if($('.selected').length == 2) {
+                if ($('.selected').first().data('cardValue') == $('.selected').last().data('cardValue')) {
+                    $('.selected').each(function() {
+                        $(this).animate({opacity: 0}).removeClass('unmatched');
+                    }); 
+                    $('.selected').each(function() {
+                        $(this).removeClass('selected');
+                });
+            } else {
+                    setTimeout(function() {
+                        $('.selected').each(function() {
+                            $(this).html('').removeClass('selected');
+                        }); 
+                    }, 1000);
+                }
+                
+            }
         }
     };
-    app.init();
+    app.init(); 
 
 });
 </script>
