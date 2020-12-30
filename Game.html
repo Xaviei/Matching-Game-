@@ -17,6 +17,11 @@
         height: 200px;
          width: 150px;
          background: lightblue;
+         text-align: center;
+     }
+     .card p {
+         font-size: 18px;
+         color: Red;
      }
  </style>
  
@@ -82,6 +87,7 @@ $(document).ready(function(){
                     $('.selected').each(function() {
                         $(this).removeClass('selected');
                 });
+                app.checkWin();
             } else {
                     setTimeout(function() {
                         $('.selected').each(function() {
@@ -90,6 +96,11 @@ $(document).ready(function(){
                     }, 1000);
                 }
                 
+            }
+        },
+        checkWin: function() {
+            if($('.unmatched').length === 0 ) {
+                $('.container').html('<h1>You Are More Enlightened</h1>');
             }
         }
     };
